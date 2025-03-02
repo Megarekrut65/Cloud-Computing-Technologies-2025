@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8001/api/v1/users/'; // Adjust to your User Service URL
+const API_URL = 'https://users-service-production-b4c3.up.railway.app/api/v1/users/'; // Adjust to your User Service URL
 
 // Register user
 export const registerUser = async (userData) => {
