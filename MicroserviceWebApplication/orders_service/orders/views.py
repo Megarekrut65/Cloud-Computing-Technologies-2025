@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Order
 from .serializers import OrderSerializer
 
-USER_SERVICE_URL = "http://127.0.0.1:8001"
+USER_SERVICE_URL = "http://127.0.0.1:8001/api/v1/users"
 
 class OrderCreateView(generics.CreateAPIView):
     queryset = Order.objects.all()
