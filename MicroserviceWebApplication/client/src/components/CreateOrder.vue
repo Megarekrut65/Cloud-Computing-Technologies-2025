@@ -1,66 +1,42 @@
 <template>
-    <div class="container mt-5">
-        <h2>Create Order</h2>
-        <form @submit.prevent="handleCreateOrder" class="w-50 mx-auto">
+    <div>
+        <h1>Create Order</h1>
+        <form @submit.prevent="createOrderBtn">
             <div class="mb-3">
                 <label for="product" class="form-label">Product</label>
-                <input
-                    v-model="product"
-                    type="text"
-                    class="form-control"
-                    id="product"
-                    placeholder="Enter product name"
-                    required
-                />
+                <input v-model="order.product" type="text" class="form-control" id="product" required />
             </div>
-
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input
-                    v-model="price"
-                    type="number"
-                    step="0.01"
-                    class="form-control"
-                    id="price"
-                    placeholder="Enter price"
-                    required
-                />
+                <input v-model="order.price" type="number" class="form-control" id="price" required />
             </div>
-
-            <button type="submit" class="btn btn-success w-100">Create Order</button>
+            <button type="submit" class="btn btn-primary">Submit Order</button>
         </form>
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { createOrder } from '../services/orderService';
 import { useRouter } from 'vue-router';
+import {createOrder} from "@/services/orderService.js";
 
-const product = ref('');
-const price = ref(0);
-const user_id = ref(null);
 const router = useRouter();
 
-const handleCreateOrder = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        alert('Please login first');
-        router.push('/login');
-        return;
-    }
+const order = ref({
+    product: '',
+    price: 0,
+});
 
+const createOrderBtn = async () => {
     try {
-        const orderData = {
-            product: product.value,
-            price: price.value,
-            user_id: user_id.value,
-        };
-        const order = await createOrder(orderData, token);
-        alert('Order created successfully!');
-        router.push('/process-payment');
+        const token = localStorage.getItem('token');
+        const response = await createOrder(order.value, token);
+        const order_id = response.id;  // Assuming the backend response includes the order_id
+
+        // Navigate to the Payment page with the order_id as a route param
+        router.push({ name: 'Payment', params: { order_id } });
     } catch (error) {
-        alert('Error creating order');
+        console.error('Error creating order:', error);
     }
 };
 </script>

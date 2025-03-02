@@ -1,47 +1,43 @@
 <template>
-    <div class="container mt-5">
-        <h2>Process Payment</h2>
-        <form @submit.prevent="handlePayment" class="w-50 mx-auto">
+    <div>
+        <h1>Payment for Order #{{ order_id }}</h1>
+        <form @submit.prevent="processPaymentBtn">
             <div class="mb-3">
-                <label for="amount" class="form-label">Amount</label>
-                <input
-                    v-model="amount"
-                    type="number"
-                    class="form-control"
-                    id="amount"
-                    placeholder="Enter amount"
-                    required
-                />
+                <label for="paymentAmount" class="form-label">Amount</label>
+                <input v-model="payment.amount" type="number" class="form-control" id="paymentAmount" required />
             </div>
-
-            <button type="submit" class="btn btn-warning w-100">Process Payment</button>
+            <button type="submit" class="btn btn-success">Pay</button>
         </form>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { processPayment } from '../services/paymentService';
-import { useRouter } from 'vue-router';
+import { ref, defineProps } from 'vue';
+import {processPayment} from "@/services/paymentService.js";
+import {useRouter} from "vue-router";
 
-const amount = ref(0);
-const router = useRouter();
+// Extract the order_id from route params using defineProps
+const props = defineProps({
+    order_id: {
+        type: String,
+        required: true,
+    },
+});
 
-const handlePayment = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        alert('Please login first');
-        router.push('/login');
-        return;
-    }
+const payment = ref({
+    amount: '',
+    order_id:props.order_id
+});
 
+const router = useRouter()
+
+const processPaymentBtn = async () => {
     try {
-        const paymentData = { order_id: 1, amount: amount.value }; // Example order_id
-        const payment = await processPayment(paymentData, token);
-        alert('Payment processed successfully!');
-        router.push('/');
+        const token = localStorage.getItem('token');
+        const response = await processPayment(payment.value, token);
+        router.push("/paid");
     } catch (error) {
-        alert('Error processing payment');
+        console.error('Payment failed:', error);
     }
 };
 </script>
