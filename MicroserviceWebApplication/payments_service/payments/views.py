@@ -1,3 +1,4 @@
+import decouple
 import requests
 from django.conf import settings
 from rest_framework import generics
@@ -5,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Payment
 from .serializers import PaymentSerializer
 
-ORDER_SERVICE_URL = "http://127.0.0.1:8002/api/v1/orders"
+ORDER_SERVICE_URL = decouple.config('ORDER_SERVICE_URL')
 
 class PaymentCreateView(generics.CreateAPIView):
     queryset = Payment.objects.all()

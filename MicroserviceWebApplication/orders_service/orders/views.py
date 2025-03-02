@@ -1,10 +1,11 @@
+import decouple
 import requests
 from rest_framework import generics
 
 from .models import Order
 from .serializers import OrderSerializer
 
-USER_SERVICE_URL = "http://127.0.0.1:8001/api/v1/users"
+USER_SERVICE_URL = decouple.config('USER_SERVICE_URL')
 
 class OrderCreateView(generics.CreateAPIView):
     queryset = Order.objects.all()
