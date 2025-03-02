@@ -18,9 +18,6 @@
                         <li class="nav-item">
                             <router-link to="/create-order" class="nav-link">Create Order</router-link>
                         </li>
-                        <li class="nav-item">
-                            <router-link to="/process-payment" class="nav-link">Process Payment</router-link>
-                        </li>
                     </ul>
                 </div>
             </div>
