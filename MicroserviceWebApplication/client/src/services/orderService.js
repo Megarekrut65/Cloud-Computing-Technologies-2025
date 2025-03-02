@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define the backend URL (adjust it based on your setup)
-const API_URL = 'https://orders-service-production-7469.up.railway.app/api/orders'; // Replace with your API base URL
+const API_URL = 'https://gateway-production-69da.up.railway.app/api/orders'; // Replace with your API base URL
 
 // Function to create an order
 export const createOrder = async (orderData, token) => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://users-service-production-b4c3.up.railway.app/api/'; // Adjust to your User Service URL
+const API_URL = 'https://gateway-production-69da.up.railway.app/api/'; // Adjust to your User Service URL
 
 // Register user
 export const registerUser = async (userData) => {
