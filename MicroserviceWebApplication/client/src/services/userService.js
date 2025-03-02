@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://users-service-production-b4c3.up.railway.app/api/v1/users/'; // Adjust to your User Service URL
+const API_URL = 'https://users-service-production-b4c3.up.railway.app/api/'; // Adjust to your User Service URL
 
 // Register user
 export const registerUser = async (userData) => {
@@ -8,7 +8,7 @@ export const registerUser = async (userData) => {
         const response = await axios.post(`${API_URL}register/`, userData);
         return response.data;
     } catch (error) {
-        console.error('Error registering user:', error);
+        alert(`Error registering user:${error}`, );
         throw error;
     }
 };
@@ -19,7 +19,7 @@ export const loginUser = async (credentials) => {
         const response = await axios.post(`${API_URL}login/`, credentials); // Assuming there's a login route in User Service
         return response.data;
     } catch (error) {
-        console.error('Error logging in:', error);
+        alert(`Error login user:${error}`, );
         throw error;
     }
 };
