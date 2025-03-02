@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8003/api/v1/payments/'; // Adjust to your Payment Service URL
+const API_URL = 'https://payments-service-production.up.railway.app/api/v1/payments/'; // Adjust to your Payment Service URL
 
 // Process payment
 export const processPayment = async (paymentData, token) => {
