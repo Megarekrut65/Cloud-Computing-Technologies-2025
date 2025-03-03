@@ -9,7 +9,7 @@ export const registerUser = async (userData) => {
         const response = await axios.post(`${API_URL}register/`, userData);
         return response.data;
     } catch (error) {
-        console.log(`Error registering user:${error}`, );
+        console.log(`Error registering user:`, error);
         throw error;
     }
 };
@@ -20,7 +20,7 @@ export const loginUser = async (credentials) => {
         const response = await axios.post(`${API_URL}login/`, credentials); // Assuming there's a login route in User Service
         return response.data;
     } catch (error) {
-        console.log(`Error login user:${error}`, );
+        console.log(`Error login user:`, error);
         throw error;
     }
 };
