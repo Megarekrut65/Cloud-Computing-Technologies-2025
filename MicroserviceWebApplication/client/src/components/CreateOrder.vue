@@ -36,7 +36,7 @@ const createOrderBtn = async () => {
         // Navigate to the Payment page with the order_id as a route param
         router.push({ name: 'Payment', params: { order_id } });
     } catch (error) {
-        console.error('Error creating order:', error);
+        alert(`Error creating order: ${error}`);
     }
 };
 </script>

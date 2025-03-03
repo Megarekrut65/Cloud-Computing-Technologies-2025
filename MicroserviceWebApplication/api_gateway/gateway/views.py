@@ -24,7 +24,7 @@ def proxy_create_order(request):
 
 @api_view(['POST'])
 def proxy_payment(request):
-    url = f"{settings.MICROSERVICE_URLS['payment']}/api/v1/payments/process"
+    url = f"{settings.MICROSERVICE_URLS['payment']}/api/v1/payments/process/"
     headers = {'Authorization': request.headers.get('Authorization', '')}
     response = httpx.post(url, json=request.data, headers=headers)
     return JsonResponse(response.json(), status=response.status_code)

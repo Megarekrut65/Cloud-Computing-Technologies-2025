@@ -37,7 +37,7 @@ const processPaymentBtn = async () => {
         const response = await processPayment(payment.value, token);
         router.push("/paid");
     } catch (error) {
-        console.error('Payment failed:', error);
+        alert(`Payment failed: ${error}`);
     }
 };
 </script>
